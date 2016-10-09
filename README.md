@@ -2,16 +2,10 @@
 WordPress/WooCommerce plugin to support custom meta fields through the product API
 
 A very simple plugin that allows you to view, create, update or remove custom meta fields when
-managing products through the WooCommerce API v2.
+managing products through the WooCommerce API v1.
 
 It is necessary to install this plugin on the WC site providing the API.
 
-I have raised a ticket asking whether this can ever be a core feature of WooCommerce,
-but the ticket has been rejected:
-
-https://github.com/woothemes/woocommerce/issues/7593
-
-It may come back, but this plugin fills a gap in the meantime.
 
 ## Modifying Product Meta
 
