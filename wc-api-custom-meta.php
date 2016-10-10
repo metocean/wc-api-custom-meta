@@ -4,6 +4,7 @@ Plugin Name: WC API Custom Meta
 Description: Allows access to custom meta fields on products through the API.
 Version:     0.7.0
 Author:      MetOcean
+Author URI:  https://github.com/metocean/wc-api-custom-meta
 */
 
 /**
