@@ -1,11 +1,9 @@
 <?php
 /*
 Plugin Name: WC API Custom Meta
-Plugin URI:  hhttps://github.com/judgej/wc-api-custom-meta
 Description: Allows access to custom meta fields on products through the API.
 Version:     0.7.0
-Author:      Jason Judge
-Author URI:  http://academe.co.uk https://github.com/buxit
+Author:      MetOcean
 */
 
 /**
@@ -15,7 +13,7 @@ Author URI:  http://academe.co.uk https://github.com/buxit
  * modified - perhaps through a filter hook - at the start.
  */
 
-class Academe_Wc_Api_Custom_Meta
+class Wc_Api_Custom_Meta
 {
     // Meta fields we want to protect, due to them being already handled
     // by the WC API.
@@ -73,8 +71,8 @@ class Academe_Wc_Api_Custom_Meta
     {
         // GET product: add in meta field to results.
         add_filter(
-            'woocommerce_api_product_response',
-            array('Academe_Wc_Api_Custom_Meta', 'fetchCustomMeta'),
+            'woocommerce_rest_product_response',
+            array('Wc_Api_Custom_Meta', 'fetchCustomMeta'),
             10,
             4
         );
@@ -82,16 +80,16 @@ class Academe_Wc_Api_Custom_Meta
         // Want to hook into woocommerce_api_process_product_meta_{product_type} for all product types.
         foreach(static::$product_type as $product_type) {
             add_action(
-                'woocommerce_api_process_product_' . $product_type,
-                array('Academe_Wc_Api_Custom_Meta', 'updateCustomMeta'),
+                'woocommerce_rest_process_product_' . $product_type,
+                array('Wc_Api_Custom_Meta', 'updateCustomMeta'),
                 10,
                 2
             );
         }
         // Add a hook to update product variations
         add_action(
-            'woocommerce_api_save_product_variation',
-            array('Academe_Wc_Api_Custom_Meta', 'updateVariationCustomMeta'),
+            'woocommerce_rest_save_product_variation',
+            array('Wc_Api_Custom_Meta', 'updateVariationCustomMeta'),
             10,
             3
         );
@@ -191,8 +189,8 @@ class Academe_Wc_Api_Custom_Meta
      * Update or create a product variation using above function.
      */
     public static function updateVariationCustomMeta($id, $menu_order, $data) {
-        Academe_Wc_Api_Custom_Meta::updateCustomMeta($id, $data);
+        Wc_Api_Custom_Meta::updateCustomMeta($id, $data);
     }
 }
 
-Academe_Wc_Api_Custom_Meta::initialize();
+Wc_Api_Custom_Meta::initialize();
